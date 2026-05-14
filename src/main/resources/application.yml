@@ -1,0 +1,21 @@
+# spring.application.name=odn-api
+server:
+  port: 8081
+spring:
+  # config:
+  #   import: "classpath:.env.properties"
+  cloud:
+    gateway:
+      httpclient:
+        ssl:
+          use-insecure-trust-manager: true
+      routes:
+        - id: odn-api
+          uri: https://192.168.57.45:26335
+          predicates:
+            - Path=/**
+      default-filters:
+        - PreserveHostHeader=True
+odnapi:
+  username: ${ODN_API_USERNAME}
+  password: ${ODN_API_PASSWORD}
